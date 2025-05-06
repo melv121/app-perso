@@ -1,0 +1,25 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    
+    # Rediriger toutes les requêtes vers index.php sauf si le fichier/dossier existe
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)$ index.php/$1 [L]
+</IfModule>
+
+# Protection de dossiers sensibles
+<FilesMatch "^(application|system|\.|composer\.json|composer\.lock)">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Désactiver l'affichage des répertoires
+Options -Indexes
+
+# Assurer que les sessions fonctionnent correctement
+<IfModule mod_php7.c>
+    php_value output_buffering 4096
+    php_value session.auto_start 0
+    php_value session.use_only_cookies 1
+    php_value session.use_trans_sid 0
+</IfModule>
