@@ -1,0 +1,38 @@
+# Logs
+*.log
+logs/
+
+# Cache files
+application/cache/*
+!application/cache/.htaccess
+
+# Session files
+application/sessions/*
+!application/sessions/.htaccess
+
+# Config files with sensitive data
+application/config/database.php
+application/config/config.php
+
+# Upload directory
+uploads/*
+!uploads/.htaccess
+
+# IDE files
+.vscode/
+.idea/
+*.sublime-*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
+
+# Node modules (si vous utilisez npm)
+node_modules/
+
+# Composer vendor (si vous utilisez composer)
+vendor/

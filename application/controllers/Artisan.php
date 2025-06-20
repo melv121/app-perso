@@ -14,7 +14,7 @@ class Artisan extends CI_Controller {
         // Charger la base de données et les modèles avec gestion d'erreur
         try {
             $this->load->database();
-            $this->load->model(['User_model', 'Artisan_model', 'Product_model']);
+            $this->load->model(array('User_model', 'Artisan_model', 'Product_model'));
         } catch (Exception $e) {
             show_error('Erreur de base de données : ' . $e->getMessage());
         }
@@ -37,24 +37,33 @@ class Artisan extends CI_Controller {
             // En cas d'erreur, continuer avec des valeurs par défaut
         }
         
-        $this->load->view('artisan/dashboard', compact('artisan', 'products'));
+        $data = array(
+            'artisan' => $artisan,
+            'products' => $products
+        );
+        
+        $this->load->view('artisan/dashboard', $data);
     }
 
     public function devenir() {
         $user_id = $this->session->userdata('user_id');
+        $data = array();
+        
         if ($this->input->post()) {
-            $data = [
+            $insert_data = array(
                 'user_id' => $user_id,
                 'bio' => $this->input->post('bio'),
                 'website' => $this->input->post('website')
-            ];
+            );
+            
             try {
-                $this->Artisan_model->insert($data);
+                $this->Artisan_model->insert($insert_data);
                 redirect('artisan/dashboard');
             } catch (Exception $e) {
-                $error = 'Erreur lors de l\'enregistrement.';
+                $data['error'] = 'Erreur lors de l\'enregistrement.';
             }
         }
-        $this->load->view('artisan/devenir', isset($error) ? compact('error') : []);
+        
+        $this->load->view('artisan/devenir', $data);
     }
 }

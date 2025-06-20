@@ -201,8 +201,8 @@ class Products extends CI_Controller {
                     }
                     $image_name = $upload_result['filename'];
                 } else {
-                    $data['error'] = $upload_result['error'];
-                    $this->load->view('products/edit', compact('product') + $data);
+                    $data = array('error' => $upload_result['error'], 'product' => $product);
+                    $this->load->view('products/edit', $data);
                     return;
                 }
             }
@@ -220,12 +220,13 @@ class Products extends CI_Controller {
                 $this->session->set_flashdata('success', 'Produit modifié avec succès.');
                 redirect('artisan/dashboard');
             } catch (Exception $e) {
-                $data['error'] = 'Erreur lors de la modification du produit.';
-                $this->load->view('products/edit', compact('product') + $data);
+                $data = array('error' => 'Erreur lors de la modification du produit.', 'product' => $product);
+                $this->load->view('products/edit', $data);
             }
         }
         
-        $this->load->view('products/edit', compact('product'));
+        $data = array('product' => $product);
+        $this->load->view('products/edit', $data);
     }
 
     public function delete($id) {
@@ -261,10 +262,12 @@ class Products extends CI_Controller {
         try {
             $this->load->model('Product_model');
             $products = $this->Product_model->get_all();
-            $this->load->view('products/collections', compact('products'));
+            $data = array('products' => $products);
+            $this->load->view('products/collections', $data);
         } catch (Exception $e) {
             $products = array();
-            $this->load->view('products/collections', compact('products'));
+            $data = array('products' => $products);
+            $this->load->view('products/collections', $data);
         }
     }
     

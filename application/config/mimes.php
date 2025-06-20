@@ -1,35 +1,16 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-$active_group = 'default';
-$query_builder = TRUE;
+/*
+| -------------------------------------------------------------------
+| MIME TYPES
+| -------------------------------------------------------------------
+| This file contains an array of mime types.  It is used by the
+| Upload class to help identify allowed file types.
+|
+*/
 
-$db['default'] = array(
-    'dsn'   => '',
-    'hostname' => 'localhost',
-    'username' => 'root',
-    'password' => '',
-    'database' => 'marketplace_artisanat',
-    'dbdriver' => 'mysqli',
-    'dbprefix' => '',
-    'pconnect' => FALSE,
-    'db_debug' => (ENVIRONMENT !== 'production'),
-    'cache_on' => FALSE,
-    'cachedir' => '',
-    'char_set' => 'utf8mb4',
-    'dbcollat' => 'utf8mb4_general_ci',
-    'swap_pre' => '',
-    'encrypt' => FALSE,
-    'compress' => FALSE,
-    'stricton' => FALSE,
-    'failover' => array(),
-    'save_queries' => TRUE
-);
-
-// Ajouter/vérifier ces types MIME pour les images
-$mimes = array(
-    // ...existing mimes...
-    
+return array(
     'hqx'	=>	'application/mac-binhex40',
     'cpt'	=>	'application/mac-compactpro',
     'csv'	=>	array('text/x-comma-separated-values', 'text/comma-separated-values', 'application/octet-stream', 'application/vnd.ms-excel', 'application/x-csv', 'text/x-csv', 'text/csv', 'application/csv', 'application/excel', 'application/vnd.msexcel', 'text/plain'),
@@ -106,6 +87,7 @@ $mimes = array(
     'mj2'	=>	array('image/jp2', 'video/mj2', 'image/jpx', 'image/jpm'),
     'mjp2'	=>	array('image/jp2', 'video/mj2', 'image/jpx', 'image/jpm'),
     'png'	=>	array('image/png', 'image/x-png'),
+    'webp'	=>	'image/webp',
     'tiff'	=>	'image/tiff',
     'tif'	=>	'image/tiff',
     'css'	=>	array('text/css', 'text/plain'),
@@ -199,11 +181,5 @@ $mimes = array(
     'odt'	=>	'application/vnd.oasis.opendocument.text',
     'odm'	=>	'application/vnd.oasis.opendocument.text-master',
     'ott'	=>	'application/vnd.oasis.opendocument.text-template',
-    'oth'	=>	'application/vnd.oasis.opendocument.text-web',
-    
-    // Types d'images supplémentaires pour éviter les erreurs
-    'webp'	=>	array('image/webp', 'image/x-webp'),
-    'avif'	=>	'image/avif',
-    'heic'	=>	array('image/heic', 'image/heif'),
-    'heif'	=>	array('image/heic', 'image/heif')
+    'oth'	=>	'application/vnd.oasis.opendocument.text-web'
 );

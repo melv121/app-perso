@@ -8,68 +8,112 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Inter', sans-serif; background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); min-height: 100vh; }
-        .navbar { background: rgba(255,255,255,0.98) !important; backdrop-filter: blur(15px); box-shadow: 0 8px 32px rgba(0,0,0,0.1); border-bottom: 1px solid rgba(212,175,55,0.2); }
-        .navbar-brand { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 1.8rem; color: #1a1a2e !important; }
+        .navbar { background: rgba(255,255,255,0.98) !important; backdrop-filter: blur(15px); box-shadow: 0 8px 32px rgba(0,0,0,0.1); border-bottom: 1px solid rgba(212,175,55,0.2); padding: 0.5rem 0; }
+        .navbar-brand { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 1.5rem; color: #1a1a2e !important; }
         
-        .hero-collections { background: linear-gradient(135deg, #2c5aa0 0%, #1a1a2e 100%); padding: 120px 0 100px; color: white; position: relative; overflow: hidden; }
-        .hero-collections::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="white" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>'); }
-        .hero-title { font-family: 'Playfair Display', serif; font-size: 3.5rem; margin-bottom: 1.5rem; font-weight: 800; position: relative; z-index: 2; }
-        .hero-subtitle { font-size: 1.3rem; opacity: 0.95; position: relative; z-index: 2; }
+        /* Mobile navbar optimisée */
+        .navbar-toggler { border: none; padding: 0.2rem 0.5rem; }
+        .navbar-toggler:focus { box-shadow: none; }
+        .navbar-toggler-icon { background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%2826, 26, 46, 0.8%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='m4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e"); }
         
-        .filter-section { background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%); border: 1px solid rgba(44,90,160,0.1); border-radius: 28px; padding: 3rem; margin: -60px 0 60px; box-shadow: 0 25px 60px rgba(0,0,0,0.15); position: relative; }
-        .filter-section::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 5px; background: linear-gradient(90deg, #2c5aa0, #d4af37, #1a1a2e); border-radius: 28px 28px 0 0; }
-        .filter-btn { border: 2px solid #e9ecef; border-radius: 50px; padding: 12px 28px; margin: 8px; background: white; color: #6c757d; transition: all 0.4s ease; font-weight: 600; }
-        .filter-btn:hover { border-color: #2c5aa0; color: #2c5aa0; transform: translateY(-2px); }
-        .filter-btn.active { background: linear-gradient(135deg, #2c5aa0 0%, #1a1a2e 100%); color: white; border-color: #2c5aa0; transform: translateY(-2px); box-shadow: 0 8px 25px rgba(44,90,160,0.3); }
+        /* Navigation mobile compacte */
+        @media (max-width: 991.98px) {
+            .navbar-brand { font-size: 1.3rem; }
+            .navbar-collapse { background: rgba(255,255,255,0.95); margin-top: 0.5rem; border-radius: 15px; padding: 1rem; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+            .navbar-nav .nav-link { padding: 0.5rem 1rem; margin: 0; border-radius: 10px; font-size: 0.9rem; }
+            .navbar-text { padding: 0.5rem 1rem !important; font-size: 0.85rem; }
+            .hero-collections { padding: 100px 0 80px; margin-top: 60px; }
+            .hero-title { font-size: 2.5rem; }
+        }
         
-        .product-card { background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%); border: 1px solid rgba(44,90,160,0.1); border-radius: 24px; overflow: hidden; box-shadow: 0 15px 35px rgba(0,0,0,0.08); transition: all 0.4s ease; height: 100%; margin-bottom: 2rem; }
-        .product-card:hover { transform: translateY(-12px) scale(1.02); box-shadow: 0 30px 60px rgba(0,0,0,0.2); border-color: rgba(212,175,55,0.4); }
+        /* Smartphone très compact */
+        @media (max-width: 576px) {
+            .navbar { padding: 0.3rem 0; }
+            .navbar-brand { font-size: 1.1rem; }
+            .hero-collections { padding: 80px 0 60px; margin-top: 50px; }
+            .hero-title { font-size: 2rem; }
+            .product-card { margin-bottom: 1.5rem; }
+        }
+        
+        .hero-collections { background: linear-gradient(135deg, rgba(44,90,160,0.9), rgba(26,26,46,0.9)); padding: 140px 0; color: white; position: relative; overflow: hidden; }
+        .hero-title { font-family: 'Playfair Display', serif; font-size: 4rem; font-weight: 800; margin-bottom: 2rem; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
+        .products-section { padding: 100px 0; background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%); }
+        .product-card { background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%); border: 1px solid rgba(44,90,160,0.1); border-radius: 24px; overflow: hidden; box-shadow: 0 15px 35px rgba(0,0,0,0.08); transition: all 0.4s ease; height: 100%; }
+        .product-card:hover { transform: translateY(-12px) scale(1.02); box-shadow: 0 25px 50px rgba(0,0,0,0.15); border-color: rgba(212,175,55,0.3); }
         .product-image { height: 280px; background: linear-gradient(45deg, #2c5aa0, #1a1a2e); display: flex; align-items: center; justify-content: center; color: white; font-size: 3.5rem; position: relative; overflow: hidden; }
-        .product-image::after { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(212,175,55,0.3), transparent); transition: left 0.6s; }
-        .product-card:hover .product-image::after { left: 100%; }
         .product-body { padding: 2rem; }
         .product-title { font-weight: 700; color: #1a1a2e; margin-bottom: 1rem; font-size: 1.2rem; }
         .product-description { color: #6c757d; margin-bottom: 1.5rem; font-size: 0.95rem; line-height: 1.6; }
         .product-price { color: #2c5aa0; font-weight: 800; font-size: 1.4rem; }
-        .product-category { position: absolute; top: 20px; left: 20px; background: linear-gradient(45deg, #d4af37, #ffd700); color: #1a1a2e; padding: 8px 18px; border-radius: 25px; font-size: 0.85rem; font-weight: 700; }
-        .artisan-info { display: flex; align-items: center; margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid #f1f3f4; }
-        .artisan-avatar { width: 45px; height: 45px; background: linear-gradient(45deg, #2c5aa0, #1a1a2e); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; margin-right: 12px; }
-        
-        .stats-section { background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%); border: 1px solid rgba(44,90,160,0.1); border-radius: 24px; padding: 2.5rem; box-shadow: 0 15px 35px rgba(0,0,0,0.08); margin-bottom: 3rem; }
-        .stat-item { text-align: center; }
-        .stat-number { font-size: 3rem; font-weight: 800; color: #2c5aa0; margin-bottom: 0.5rem; }
-        .stat-label { color: #6c757d; font-size: 1rem; font-weight: 500; }
-        
         .navbar-nav .nav-link { color: #1a1a2e !important; font-weight: 600; margin: 0 15px; transition: all 0.3s ease; }
         .navbar-nav .nav-link:hover { color: #2c5aa0 !important; }
         .navbar-nav .nav-link.active { color: #d4af37 !important; font-weight: 700; }
-        .badge-user { background: linear-gradient(45deg, #2c5aa0, #1a1a2e); border: none; padding: 10px 20px; border-radius: 25px; font-weight: 600; }
-        .btn-success { background: linear-gradient(45deg, #d4af37, #ffd700) !important; color: #1a1a2e !important; border: none !important; font-weight: 700; border-radius: 12px; transition: all 0.3s ease; }
+        .btn-success { background: linear-gradient(45deg, #d4af37, #ffd700) !important; color: #1a1a2e !important; border: none !important; font-weight: 600; border-radius: 12px; transition: all 0.3s ease; }
         .btn-success:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(212,175,55,0.4); color: #1a1a2e !important; }
-        .btn-outline-primary { border: 2px solid #2c5aa0; color: #2c5aa0; background: transparent; border-radius: 12px; }
-        .btn-outline-primary:hover { background: #2c5aa0; border-color: #2c5aa0; }
+        
+        /* Footer responsive */
+        .footer { background: linear-gradient(135deg, #1a1a2e 0%, #0f0f23 100%); color: white; padding: 60px 0 30px; margin-top: 80px; position: relative; overflow: hidden; }
+        .footer::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, #2c5aa0, #d4af37, #1a1a2e); }
+        .footer-section h5 { font-family: 'Playfair Display', serif; font-weight: 700; color: #d4af37; margin-bottom: 1.5rem; }
+        .footer-links { list-style: none; padding: 0; }
+        .footer-links li { margin-bottom: 0.8rem; }
+        .footer-links a { color: rgba(255,255,255,0.8); text-decoration: none; transition: all 0.3s ease; }
+        .footer-links a:hover { color: #d4af37; transform: translateX(5px); }
+        .footer-social { display: flex; gap: 15px; margin-top: 1rem; }
+        .footer-social a { display: inline-block; width: 45px; height: 45px; background: linear-gradient(45deg, #2c5aa0, #d4af37); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.2rem; transition: all 0.3s ease; }
+        .footer-social a:hover { transform: translateY(-3px) scale(1.1); box-shadow: 0 10px 20px rgba(212,175,55,0.3); }
+        .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); margin-top: 40px; padding-top: 30px; text-align: center; color: rgba(255,255,255,0.6); }
+        .footer-logo { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 700; color: #d4af37; margin-bottom: 1rem; }
+        
+        /* Footer mobile responsive */
+        @media (max-width: 768px) {
+            .footer { padding: 40px 0 20px; margin-top: 50px; }
+            .footer-section { margin-bottom: 2rem; text-align: center; }
+            .footer-social { justify-content: center; }
+            .footer-logo { font-size: 1.5rem; }
+        }
+        
+        @media (max-width: 576px) {
+            .footer { padding: 30px 0 15px; }
+            .footer-section h5 { font-size: 1.1rem; }
+            .footer-social a { width: 40px; height: 40px; font-size: 1rem; }
+        }
     </style>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg fixed-top">
   <div class="container">
-    <a class="navbar-brand" href="<?= site_url('/') ?>">
+    <a class="navbar-brand" href="<?php echo site_url('/'); ?>">
         <i class="bi bi-palette"></i> La Galerie Artisanale
     </a>
-    <div class="navbar-nav ms-auto">
-      <a class="nav-link" href="<?= site_url('/') ?>">Accueil</a>
-      <a class="nav-link" href="<?= site_url('about') ?>">À propos</a>
-      <a class="nav-link active" href="<?= site_url('collections') ?>">Collections</a>
-      <a class="nav-link" href="<?= site_url('contact') ?>">Contact</a>
-      <?php if ($this->session->userdata('logged_in')): ?>
-        <span class="navbar-text">
-          <i class="bi bi-person-circle"></i> <?= $this->session->userdata('username') ?>
-        </span>
-        <a class="nav-link" href="<?= site_url('logout') ?>">Déconnexion</a>
-      <?php else: ?>
-        <a class="nav-link" href="<?= site_url('login') ?>">Connexion</a>
-        <a class="nav-link" href="<?= site_url('register') ?>">Inscription</a>
-      <?php endif; ?>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="<?php echo site_url('/'); ?>"><i class="bi bi-house"></i> Accueil</a></li>
+        <li class="nav-item"><a class="nav-link active" href="<?php echo site_url('collections'); ?>"><i class="bi bi-grid"></i> Collections</a></li>
+        <li class="nav-item"><a class="nav-link" href="<?php echo site_url('about'); ?>"><i class="bi bi-info-circle"></i> À propos</a></li>
+        <li class="nav-item"><a class="nav-link" href="<?php echo site_url('contact'); ?>"><i class="bi bi-envelope"></i> Contact</a></li>
+        
+        <?php if ($this->session->userdata('logged_in')): ?>
+          <li class="nav-item">
+            <span class="navbar-text">
+              <i class="bi bi-person-circle"></i> <?php echo $this->session->userdata('username'); ?>
+              <span class="badge badge-user ms-1">
+                <?php echo ucfirst($this->session->userdata('type')); ?>
+              </span>
+            </span>
+          </li>
+          <?php if ($this->session->userdata('type') == 'artisan'): ?>
+            <li class="nav-item"><a class="nav-link" href="<?php echo site_url('artisan/dashboard'); ?>"><i class="bi bi-speedometer2"></i> Dashboard</a></li>
+          <?php endif; ?>
+          <li class="nav-item"><a class="nav-link" href="<?php echo site_url('logout'); ?>"><i class="bi bi-box-arrow-right"></i> Déconnexion</a></li>
+        <?php else: ?>
+          <li class="nav-item"><a class="nav-link" href="<?php echo site_url('login'); ?>"><i class="bi bi-box-arrow-in-right"></i> Connexion</a></li>
+          <li class="nav-item"><a class="nav-link" href="<?php echo site_url('register'); ?>"><i class="bi bi-person-plus"></i> Inscription</a></li>
+        <?php endif; ?>
+      </ul>
     </div>
   </div>
 </nav>
@@ -78,494 +122,155 @@
 <section class="hero-collections">
     <div class="container text-center">
         <h1 class="hero-title">Nos Collections</h1>
-        <p class="hero-subtitle">Découvrez nos créations artisanales par catégorie</p>
+        <p class="hero-subtitle">Découvrez toutes les créations artisanales de notre galerie</p>
     </div>
 </section>
 
-<div class="container">
-    <!-- Filtres par catégorie -->
-    <div class="filter-section" data-aos="fade-up">
-        <div class="text-center mb-3">
-            <h4 style="color: #2c3e50; font-family: 'Playfair Display', serif;">
-                <i class="bi bi-funnel"></i> Filtrer par catégorie
-            </h4>
-        </div>
-        <div class="text-center">
-            <button class="btn filter-btn active" data-category="all">
-                <i class="bi bi-grid"></i> Toutes les créations
-            </button>
-            <button class="btn filter-btn" data-category="bijoux">
-                <i class="bi bi-gem"></i> Bijoux
-            </button>
-            <button class="btn filter-btn" data-category="poterie">
-                <i class="bi bi-cup"></i> Poterie
-            </button>
-            <button class="btn filter-btn" data-category="textile">
-                <i class="bi bi-threads"></i> Textile
-            </button>
-            <button class="btn filter-btn" data-category="bois">
-                <i class="bi bi-tree"></i> Travail du bois
-            </button>
-            <button class="btn filter-btn" data-category="decoration">
-                <i class="bi bi-house-heart"></i> Décoration
-            </button>
-            <button class="btn filter-btn" data-category="art">
-                <i class="bi bi-palette2"></i> Art & Peinture
-            </button>
-        </div>
-    </div>
-
-    <!-- Statistiques -->
-    <div class="stats-section" data-aos="fade-up">
-        <div class="row">
-            <div class="col-md-3 stat-item">
-                <div class="stat-number" id="total-products"><?= count($products ?? []) ?></div>
-                <div class="stat-label">Créations</div>
-            </div>
-            <div class="col-md-3 stat-item">
-                <div class="stat-number">24</div>
-                <div class="stat-label">Artisans</div>
-            </div>
-            <div class="col-md-3 stat-item">
-                <div class="stat-number">6</div>
-                <div class="stat-label">Catégories</div>
-            </div>
-            <div class="col-md-3 stat-item">
-                <div class="stat-number">150+</div>
-                <div class="stat-label">Clients satisfaits</div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Grille de produits -->
-    <div class="row" id="products-grid">
-        <?php if (!empty($products)): ?>
-            <?php foreach ($products as $index => $p): ?>
-                <div class="col-lg-4 col-md-6 product-item" data-category="<?= $p->category ?? 'art' ?>" data-aos="fade-up" data-aos-delay="<?= $index * 100 ?>">
-                    <div class="card product-card">
-                        <div class="product-image position-relative">
-                            <div class="product-category"><?= ucfirst($p->category ?? 'Art') ?></div>
-                            <?php if (!empty($p->image)): ?>
-                                <img src="<?= base_url('uploads/' . $p->image) ?>" class="w-100 h-100 object-fit-cover" alt="<?= htmlspecialchars($p->name) ?>">
-                            <?php else: ?>
-                                <i class="bi bi-palette"></i>
-                            <?php endif; ?>
-                        </div>
-                        <div class="product-body">
-                            <h5 class="product-title"><?= htmlspecialchars($p->name ?? 'Création artisanale') ?></h5>
-                            <p class="product-description"><?= htmlspecialchars(substr($p->description ?? 'Belle création artisanale unique', 0, 100)) ?>...</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <span class="product-price"><?= number_format($p->price ?? 0, 2) ?> €</span>
-                                <div>
-                                    <button class="btn btn-sm btn-outline-primary me-1" onclick="toggleFavorite(<?= $p->id ?>)">
-                                        <i class="bi bi-heart"></i>
-                                    </button>
-                                    <button class="btn btn-sm btn-success" onclick="openPaymentModal(<?= $p->id ?>, '<?= htmlspecialchars($p->name) ?>', <?= $p->price ?>)">
+<!-- Section Produits -->
+<section class="products-section">
+    <div class="container">
+        <div class="row g-4">
+            <?php if (!empty($products)): ?>
+                <?php foreach ($products as $index => $p): ?>
+                    <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="<?php echo $index * 100; ?>">
+                        <div class="card product-card">
+                            <div class="product-image">
+                                <?php if (!empty($p->image)): ?>
+                                    <img src="<?php echo base_url('uploads/' . $p->image); ?>" class="w-100 h-100 object-fit-cover" alt="<?php echo htmlspecialchars($p->name); ?>">
+                                <?php else: ?>
+                                    <i class="bi bi-palette"></i>
+                                <?php endif; ?>
+                            </div>
+                            <div class="product-body">
+                                <h5 class="product-title"><?php echo htmlspecialchars($p->name ?? 'Produit'); ?></h5>
+                                <p class="product-description"><?php echo htmlspecialchars(substr($p->description ?? '', 0, 100)); ?>...</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="product-price"><?php echo number_format($p->price ?? 0, 2); ?> €</span>
+                                    <button class="btn btn-sm btn-success">
                                         <i class="bi bi-cart-plus"></i> Acheter
                                     </button>
                                 </div>
                             </div>
-                            <div class="artisan-info">
-                                <div class="artisan-avatar">
-                                    <?= substr($p->username ?? 'A', 0, 1) ?>
-                                </div>
-                                <div>
-                                    <small class="text-muted">Créé par</small><br>
-                                    <strong><?= htmlspecialchars($p->username ?? 'Artisan') ?></strong>
-                                </div>
-                            </div>
                         </div>
                     </div>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <div class="col-12 text-center">
+                    <div class="py-5">
+                        <i class="bi bi-palette display-1 text-muted mb-3"></i>
+                        <h4 class="text-muted">Aucune création pour le moment</h4>
+                        <p class="text-muted">Les artisans préparent de magnifiques créations pour vous !</p>
+                    </div>
                 </div>
-            <?php endforeach; ?>
-        <?php else: ?>
-            <div class="col-12 text-center py-5">
-                <i class="bi bi-palette display-1 text-muted mb-3"></i>
-                <h4 class="text-muted">Aucune création pour le moment</h4>
-                <p class="text-muted">Les artisans préparent de magnifiques créations pour vous !</p>
-            </div>
-        <?php endif; ?>
+            <?php endif; ?>
+        </div>
     </div>
-</div>
+</section>
 
-<!-- Modal de paiement -->
-<div class="modal fade" id="paymentModal" tabindex="-1">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content" style="border-radius: 20px; border: none;">
-            <div class="modal-header" style="border: none; background: linear-gradient(45deg, #667eea, #764ba2); color: white; border-radius: 20px 20px 0 0;">
-                <h5 class="modal-title"><i class="bi bi-credit-card"></i> Finaliser votre achat</h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+<!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-lg-4 col-md-6">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <i class="bi bi-palette"></i> La Galerie Artisanale
+                    </div>
+                    <p class="mb-3">Explorez notre collection unique de créations artisanales authentiques.</p>
+                    <div class="footer-social">
+                        <a href="#" title="Facebook"><i class="bi bi-facebook"></i></a>
+                        <a href="#" title="Instagram"><i class="bi bi-instagram"></i></a>
+                        <a href="#" title="Twitter"><i class="bi bi-twitter"></i></a>
+                        <a href="#" title="Pinterest"><i class="bi bi-pinterest"></i></a>
+                    </div>
+                </div>
             </div>
-            <div class="modal-body p-4">
-                <!-- Résumé commande -->
-                <div class="order-summary mb-4">
-                    <div class="d-flex align-items-center p-3" style="background: #f8f9fa; border-radius: 15px;">
-                        <div class="product-thumb me-3" style="width: 80px; height: 80px; background: linear-gradient(45deg, #667eea, #764ba2); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem;">
-                            <i class="bi bi-palette"></i>
-                        </div>
-                        <div class="flex-grow-1">
-                            <h6 id="modal-product-name" class="mb-1">Nom du produit</h6>
-                            <p class="text-muted mb-0">Création artisanale unique</p>
-                        </div>
-                        <div class="text-end">
-                            <h5 id="modal-product-price" class="mb-0 text-success">0,00 €</h5>
-                        </div>
-                    </div>
+            
+            <div class="col-lg-2 col-md-6">
+                <div class="footer-section">
+                    <h5>Collections</h5>
+                    <ul class="footer-links">
+                        <li><a href="#">Bijoux</a></li>
+                        <li><a href="#">Poterie</a></li>
+                        <li><a href="#">Textile</a></li>
+                        <li><a href="#">Toutes les créations</a></li>
+                    </ul>
                 </div>
-
-                <!-- Informations client -->
-                <div class="customer-info mb-4">
-                    <h6 class="mb-3"><i class="bi bi-person"></i> Informations de livraison</h6>
-                    <div class="row g-3">
-                        <div class="col-md-6">
-                            <div class="form-floating">
-                                <input type="text" class="form-control" id="firstName" placeholder="Prénom" required>
-                                <label for="firstName">Prénom</label>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-floating">
-                                <input type="text" class="form-control" id="lastName" placeholder="Nom" required>
-                                <label for="lastName">Nom</label>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="form-floating">
-                                <input type="email" class="form-control" id="email" placeholder="Email" required>
-                                <label for="email">Email</label>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="form-floating">
-                                <input type="text" class="form-control" id="address" placeholder="Adresse" required>
-                                <label for="address">Adresse complète</label>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-floating">
-                                <input type="text" class="form-control" id="city" placeholder="Ville" required>
-                                <label for="city">Ville</label>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-floating">
-                                <input type="text" class="form-control" id="postal" placeholder="Code postal" required>
-                                <label for="postal">Code postal</label>
-                            </div>
-                        </div>
-                    </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6">
+                <div class="footer-section">
+                    <h5>Achat</h5>
+                    <ul class="footer-links">
+                        <li><a href="#">Guide d'achat</a></li>
+                        <li><a href="#">Livraison</a></li>
+                        <li><a href="#">Retours</a></li>
+                        <li><a href="#">Paiement sécurisé</a></li>
+                    </ul>
                 </div>
-
-                <!-- Méthodes de paiement -->
-                <div class="payment-methods">
-                    <h6 class="mb-3"><i class="bi bi-credit-card"></i> Choisissez votre méthode de paiement</h6>
-                    
-                    <!-- Paiements rapides -->
-                    <div class="quick-payments mb-4">
-                        <div class="row g-2">
-                            <div class="col-md-4">
-                                <button class="btn btn-dark w-100 py-3" onclick="processPayment('apple-pay')">
-                                    <i class="bi bi-apple"></i> Apple Pay
-                                </button>
-                            </div>
-                            <div class="col-md-4">
-                                <button class="btn w-100 py-3" style="background: #0070ba; color: white;" onclick="processPayment('paypal')">
-                                    <i class="bi bi-paypal"></i> PayPal
-                                </button>
-                            </div>
-                            <div class="col-md-4">
-                                <button class="btn w-100 py-3" style="background: #4285f4; color: white;" onclick="processPayment('google-pay')">
-                                    <i class="bi bi-google"></i> Google Pay
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="divider text-center mb-4">
-                        <span class="px-3 text-muted" style="background: white;">ou</span>
-                        <hr style="margin-top: -12px;">
-                    </div>
-
-                    <!-- Paiement par carte -->
-                    <div class="card-payment">
-                        <div class="row g-3">
-                            <div class="col-12">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="cardNumber" placeholder="Numéro de carte" maxlength="19">
-                                    <label for="cardNumber"><i class="bi bi-credit-card"></i> Numéro de carte</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="cardExpiry" placeholder="MM/AA" maxlength="5">
-                                    <label for="cardExpiry">MM/AA</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="cardCvc" placeholder="CVC" maxlength="3">
-                                    <label for="cardCvc">CVC</label>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="cardName" placeholder="Nom sur la carte">
-                                    <label for="cardName">Nom sur la carte</label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="text-center mt-4">
-                            <button class="btn btn-lg w-100" style="background: linear-gradient(45deg, #667eea, #764ba2); color: white; border-radius: 15px; padding: 15px;" onclick="processPayment('card')">
-                                <i class="bi bi-lock"></i> Payer maintenant
-                            </button>
-                        </div>
-                    </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6">
+                <div class="footer-section">
+                    <h5>Service client</h5>
+                    <ul class="footer-links">
+                        <li><a href="<?php echo site_url('contact'); ?>">Nous contacter</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Suivi de commande</a></li>
+                        <li><a href="#">Support</a></li>
+                    </ul>
                 </div>
-
-                <!-- Sécurité -->
-                <div class="security-info mt-4 p-3" style="background: #f8f9fa; border-radius: 10px;">
-                    <div class="text-center text-muted small">
-                        <i class="bi bi-shield-check text-success"></i>
-                        Paiement sécurisé SSL 256-bit • Vos données sont protégées
-                    </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <p>&copy; 2024 La Galerie Artisanale. Tous droits réservés.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p>Créations artisanales de qualité</p>
                 </div>
             </div>
         </div>
     </div>
-</div>
-
-<style>
-    .form-control:focus { border-color: #667eea; box-shadow: 0 0 0 0.2rem rgba(102,126,234,0.25); }
-    .payment-methods .btn:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
-    .order-summary { border-left: 4px solid #667eea; }
-</style>
+</footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-<!-- SweetAlert2 pour les notifications -->
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     AOS.init({ duration: 800, easing: 'ease-in-out', once: true });
     
-    let currentProductId = null;
-    let currentProductPrice = 0;
-    let allProducts = <?= json_encode($products) ?>;
-
-    function openPaymentModal(productId, productName, productPrice) {
-        currentProductId = productId;
-        currentProductPrice = productPrice;
-        
-        document.getElementById('modal-product-name').textContent = productName;
-        document.getElementById('modal-product-price').textContent = new Intl.NumberFormat('fr-FR', {
-            style: 'currency',
-            currency: 'EUR'
-        }).format(productPrice);
-        
-        new bootstrap.Modal(document.getElementById('paymentModal')).show();
-    }
-
-    // Filtrage par catégorie amélioré
-    document.querySelectorAll('.filter-btn').forEach(btn => {
-        btn.addEventListener('click', function() {
-            // Retirer la classe active de tous les boutons
-            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-            // Ajouter la classe active au bouton cliqué
-            this.classList.add('active');
-            
-            const category = this.dataset.category;
-            
-            // Afficher un loader
-            showLoader();
-            
-            // Filtrer les produits
-            filterProducts(category);
-        });
-    });
-
-    function filterProducts(category) {
-        let filteredProducts = allProducts;
-        
-        if (category !== 'all') {
-            filteredProducts = allProducts.filter(product => product.category === category);
-        }
-        
-        // Mettre à jour l'affichage
-        updateProductsDisplay(filteredProducts);
-        
-        // Mettre à jour le compteur
-        document.getElementById('total-products').textContent = filteredProducts.length;
-        
-        // Masquer le loader
-        hideLoader();
-    }
-
-    function updateProductsDisplay(products) {
-        const productsGrid = document.getElementById('products-grid');
-        
-        if (products.length === 0) {
-            productsGrid.innerHTML = `
-                <div class="col-12 text-center py-5">
-                    <i class="bi bi-search display-1 text-muted mb-3"></i>
-                    <h4 class="text-muted">Aucune création dans cette catégorie</h4>
-                    <p class="text-muted">Essayez une autre catégorie ou revenez plus tard !</p>
-                </div>
-            `;
-            return;
-        }
-
-        let html = '';
-        products.forEach((product, index) => {
-            html += `
-                <div class="col-lg-4 col-md-6 product-item" data-category="${product.category || 'art'}" data-aos="fade-up" data-aos-delay="${index * 100}">
-                    <div class="card product-card">
-                        <div class="product-image position-relative">
-                            <div class="product-category">${capitalizeFirst(product.category || 'Art')}</div>
-                            ${product.image ? 
-                                `<img src="<?= base_url('uploads/') ?>${product.image}" class="w-100 h-100 object-fit-cover" alt="${escapeHtml(product.name)}">` :
-                                '<i class="bi bi-palette"></i>'
-                            }
-                        </div>
-                        <div class="product-body">
-                            <h5 class="product-title">${escapeHtml(product.name || 'Création artisanale')}</h5>
-                            <p class="product-description">${escapeHtml((product.description || 'Belle création artisanale unique').substring(0, 100))}...</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <span class="product-price">${formatPrice(product.price || 0)}</span>
-                                <div>
-                                    <button class="btn btn-sm btn-outline-primary me-1" onclick="toggleFavorite(${product.id})">
-                                        <i class="bi bi-heart"></i>
-                                    </button>
-                                    <button class="btn btn-sm btn-success" onclick="openPaymentModal(${product.id}, '${escapeHtml(product.name)}', ${product.price})">
-                                        <i class="bi bi-cart-plus"></i> Acheter
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="artisan-info">
-                                <div class="artisan-avatar">
-                                    ${(product.username || 'A').charAt(0).toUpperCase()}
-                                </div>
-                                <div>
-                                    <small class="text-muted">Créé par</small><br>
-                                    <strong>${escapeHtml(product.username || 'Artisan')}</strong>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            `;
-        });
-        
-        productsGrid.innerHTML = html;
-        
-        // Réinitialiser les animations AOS
-        AOS.refresh();
-    }
-
-    function showLoader() {
-        const productsGrid = document.getElementById('products-grid');
-        productsGrid.innerHTML = `
-            <div class="col-12 text-center py-5">
-                <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem;">
-                    <span class="visually-hidden">Chargement...</span>
-                </div>
-                <h5 class="mt-3 text-muted">Filtrage en cours...</h5>
-            </div>
-        `;
-    }
-
-    function hideLoader() {
-        // Le loader est remplacé par le contenu dans updateProductsDisplay
-    }
-
-    // Fonctions utilitaires
-    function capitalizeFirst(str) {
-        return str.charAt(0).toUpperCase() + str.slice(1);
-    }
-
-    function escapeHtml(text) {
-        const div = document.createElement('div');
-        div.textContent = text;
-        return div.innerHTML;
-    }
-
-    function formatPrice(price) {
-        return new Intl.NumberFormat('fr-FR', {
-            style: 'currency',
-            currency: 'EUR'
-        }).format(price);
-    }
-
-    function processPayment(method) {
-        // Vérifier les informations client
-        const firstName = document.getElementById('firstName').value;
-        const lastName = document.getElementById('lastName').value;
-        const email = document.getElementById('email').value;
-        
-        if (!firstName || !lastName || !email) {
-            Swal.fire({
-                icon: 'warning',
-                title: 'Informations manquantes',
-                text: 'Veuillez remplir vos informations de livraison',
-                confirmButtonColor: '#667eea'
-            });
-            return;
-        }
-
-        // Simulation du traitement de paiement
-        const modal = bootstrap.Modal.getInstance(document.getElementById('paymentModal'));
-        modal.hide();
-        
-        // Animation de succès
-        Swal.fire({
-            icon: 'success',
-            title: 'Commande confirmée !',
-            text: `Votre paiement via ${getPaymentMethodName(method)} a été traité avec succès.`,
-            confirmButtonText: 'Continuer mes achats',
-            confirmButtonColor: '#667eea'
-        });
-    }
-
-    function getPaymentMethodName(method) {
-        const methods = {
-            'apple-pay': 'Apple Pay',
-            'paypal': 'PayPal', 
-            'google-pay': 'Google Pay',
-            'card': 'Carte bancaire'
-        };
-        return methods[method] || 'Paiement sécurisé';
-    }
-
-    function toggleFavorite(productId) {
-        // Animation du cœur
-        event.target.classList.toggle('text-danger');
-        if (event.target.classList.contains('text-danger')) {
-            event.target.innerHTML = '<i class="bi bi-heart-fill"></i>';
-        } else {
-            event.target.innerHTML = '<i class="bi bi-heart"></i>';
-        }
-    }
-
-    // Formatage automatique des champs carte
+    // Fermer automatiquement le menu mobile au clic sur un lien
     document.addEventListener('DOMContentLoaded', function() {
-        const cardNumber = document.getElementById('cardNumber');
-        const cardExpiry = document.getElementById('cardExpiry');
+        const navbarCollapse = document.getElementById('navbarNav');
         
-        if (cardNumber) {
-            cardNumber.addEventListener('input', function(e) {
-                let value = e.target.value.replace(/\s/g, '').replace(/[^0-9]/gi, '');
-                let formattedValue = value.match(/.{1,4}/g)?.join(' ') || '';
-                if (formattedValue !== value) e.target.value = formattedValue;
+        if (navbarCollapse) {
+            const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
+            
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    if (navbarCollapse.classList.contains('show')) {
+                        const bsCollapse = new bootstrap.Collapse(navbarCollapse, {
+                            toggle: false
+                        });
+                        bsCollapse.hide();
+                    }
+                });
             });
-        }
-
-        if (cardExpiry) {
-            cardExpiry.addEventListener('input', function(e) {
-                let value = e.target.value.replace(/\D/g, '');
-                if (value.length >= 2) {
-                    value = value.substring(0,2) + '/' + value.substring(2,4);
+            
+            // Fermer le menu si on clique en dehors
+            document.addEventListener('click', function(event) {
+                const navbar = document.querySelector('.navbar');
+                const isClickInsideNav = navbar && navbar.contains(event.target);
+                
+                if (!isClickInsideNav && navbarCollapse.classList.contains('show')) {
+                    const bsCollapse = new bootstrap.Collapse(navbarCollapse, {
+                        toggle: false
+                    });
+                    bsCollapse.hide();
                 }
-                e.target.value = value;
             });
         }
     });

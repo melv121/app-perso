@@ -4,36 +4,35 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Welcome extends CI_Controller {
     public function __construct() {
         parent::__construct();
-        // Ne charger la base que si elle existe
-        try {
-            $this->load->database();
-        } catch (Exception $e) {
-            // Ignorer l'erreur de base de données pour l'instant
-        }
+        $this->load->library('session');
     }
 
     public function index() {
-        $products = array(); // Tableau vide par défaut
+        $data = array('products' => array());
         
-        // Essayer de charger les produits seulement si possible
         try {
+            $this->load->database();
             if (file_exists(APPPATH . 'models/Product_model.php')) {
                 $this->load->model('Product_model');
                 $products = $this->Product_model->get_all();
+                $data['products'] = $products ? $products : array();
             }
         } catch (Exception $e) {
-            // En cas d'erreur, garder un tableau vide
-            $products = array();
+            // Ignorer les erreurs et continuer avec un tableau vide
+            log_message('error', 'Database error in Welcome::index: ' . $e->getMessage());
         }
         
-        $this->load->view('welcome_message', compact('products'));
+        $this->load->view('welcome_message', $data);
     }
+    
     public function about() {
         $this->load->view('static/about');
     }
+    
     public function contact() {
         $this->load->view('static/contact');
     }
+    
     public function conditions() {
         $this->load->view('static/conditions');
     }

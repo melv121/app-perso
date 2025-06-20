@@ -2,45 +2,32 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Artisan_model extends CI_Model {
+    
+    public function __construct() {
+        parent::__construct();
+        $this->load->database();
+    }
+    
     public function get_by_user($user_id) {
-        try {
-            if (!$this->db->table_exists('artisans')) {
-                return null;
-            }
-            return $this->db->get_where('artisans', ['user_id' => $user_id])->row();
-        } catch (Exception $e) {
-            return null;
-        }
-    }
-    
-    public function create($data) {
-        try {
-            if (!$this->db->table_exists('artisans')) {
-                return false;
-            }
-            $this->db->insert('artisans', $data);
-            return $this->db->insert_id();
-        } catch (Exception $e) {
-            log_message('error', 'Erreur création artisan: ' . $e->getMessage());
-            return false;
-        }
-    }
-    
-    public function update($id, $data) {
-        try {
-            $this->db->where('id', $id);
-            return $this->db->update('artisans', $data);
-        } catch (Exception $e) {
-            log_message('error', 'Erreur mise à jour artisan: ' . $e->getMessage());
-            return false;
-        }
+        $query = $this->db->get_where('artisans', array('user_id' => $user_id));
+        return $query->row();
     }
     
     public function get_by_id($id) {
-        try {
-            return $this->db->get_where('artisans', ['id' => $id])->row();
-        } catch (Exception $e) {
-            return null;
-        }
+        $query = $this->db->get_where('artisans', array('id' => $id));
+        return $query->row();
+    }
+    
+    public function insert($data) {
+        return $this->db->insert('artisans', $data);
+    }
+    
+    public function update($id, $data) {
+        $this->db->where('id', $id);
+        return $this->db->update('artisans', $data);
+    }
+    
+    public function delete($id) {
+        return $this->db->delete('artisans', array('id' => $id));
     }
 }
